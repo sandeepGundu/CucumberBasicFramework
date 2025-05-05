@@ -1,0 +1,137 @@
+classDiagram
+  class HomePage {
+    WebDriver driver
+    By getHeaderMenuItem(String menuItemName)
+    void clickMainMenuItem(String menuItemName)
+  }
+  class HomePageSteps {
+    WebDriver driver
+    HomePage homePage
+    SeleniumUtils seleniumUtils
+    void the_user_is_on_the_goibibo_home_page()
+    void the_user_chooses_from_main_menu(String mainMenuItem)
+  }
+  class TrainsPage {
+    WebDriver driver
+    SeleniumUtils seleniumUtils
+    By trainsPageHeader
+    By searchTrainsBtn
+    By trainsSearchResultTxt
+    By getTrainsTypeOption(String travelType)
+    By getGivenDropdownField(String fieldName)
+    By getTatkalField(String fieldName)
+    By getFromToLocationField(String fromOrToLocationType)
+    By getFromLocationValueField(String fromLocationValue1, String fromLocationValue2)
+    By getDepartureDropdown(String departureField)
+    void chooseTripType(String tripType)
+    boolean verifyTrainsPageHeader()
+    String getPageHeaderText()
+    boolean verifyFields(String webElementName)
+    boolean verifyTatkalOptions(String webElementName)
+    By getDepartureDateXpath(String monthYear, String date)
+    void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)
+    void selectDepartureDate(String departureField, String monthYear, String date)
+    void clickSearchTrains()
+  }
+  class Hooks {
+    WebDriver driver
+    void setup()
+    void teardown()
+  }
+  class FlightsPageSteps {
+    WebDriver driver
+    FlightsPage flightsPage
+    void domestic_and_international_flights_page_should_be_loaded(String string)
+    void selectTripType(String tripType)
+    void verify_expected_dropdown_should_be_displayed(String from, String to, String departure, String travellersNClass)
+    void verify_expected_dropdown_should_be_displayed_RoundTrip(String from, String to, String departure, String returnFrom, String travellersNClass)
+    void the_user_selects_value_as(String fromOrToField, String value)
+    void the_user_selects_month_value_as_and_date_value_as(String departure, String monthYear, String date)
+    void the_user_selects_traveller_value_as(String travellerType, String value)
+    void the_user_clicks_dropdown(String travellersNClass)
+    void the_user_clicks_on_option(String classType)
+    void the_user_clicks_on_done_button()
+    void the_user_clicks_on_search_flights_button()
+    void the_search_the_results_section_should_be_displayed()
+  }
+  class TrainsPageSteps {
+    WebDriver driver
+    TrainsPage trainsPage
+    SearchResults_Train searchResultsTrain
+    void train_ticket_booking_page_should_be_loaded(String string)
+    void selectTrainType(String tripType)
+    void verify_expected_dropdown_should_be_displayed(String from, String to, String departure, String today, String tomorrow, String dayAfterTomorrow)
+    void the_user_selects_value_as_given(String fromOrToField, String value1, String value2)
+    void the_user_selects_month_value_as_and_date_value_as_for_train(String departure, String monthYear, String date)
+    void the_user_clicks_on_search_trains_button()
+    void the_search_the_results_section_should_be_displayed()
+  }
+  class SearchResults_Train {
+    WebDriver driver
+    SeleniumUtils seleniumUtils
+    By updateSearch_DateField
+    By updateSearchBtn
+    By getUpdateSearch_FromField(String fieldName)
+    void verifyFieldsIn_UpdateSearchPage()
+  }
+  class SeleniumUtils {
+    WebDriver driver
+    void loadApp()
+    void clickElement(WebElement element)
+    void sendText(WebElement element, String text)
+    WebElement waitForElementToBeVisible(By locator, int timeoutInSeconds)
+    WebElement waitForElementToBeClickable(By locator, int timeoutInSeconds)
+    String getElementText(WebElement element)
+    String getPageTitle()
+    void scrollToElement(WebElement element)
+    boolean isElementDisplayed(WebElement element)
+    boolean isElementEnabled(WebElement element)
+    void selectDropdownByVisibleText(WebElement dropdownElement, String visibleText)
+    void selectDropdownByIndex(WebElement dropdownElement, int index)
+    void selectDropdownByValue(WebElement dropdownElement, String value)
+    String getElementAttribute(WebElement element, String attribute)
+    boolean waitForPageTitle(String expectedTitle, int timeoutInSeconds)
+    void switchToFrame(WebElement frameElement)
+    void switchToDefaultContent()
+    void acceptAlert()
+    void dismissAlert()
+    String getAlertText()
+    void takeScreenshot(String filePath)
+    void takeScreenshot_NonCommons(String filePath)
+  }
+  class FlightsPage {
+    WebDriver driver
+    SeleniumUtils seleniumUtils
+    By flightsPageHeader
+    By departureDropdown
+    By travellersNClassDropdown
+    By travellersNClass_doneBtn
+    By travellersNClass_CancelBrn
+    By searchFlightsBtn
+    By flightsSearchResultTxt
+    By getTravelTypeOption(String travelType)
+    By getGivenDropdownField(String fieldName)
+    By getFromToLocationField(String fromOrToLocationType)
+    By getFromLocationValueField(String fromLocationValue)
+    By getDepartureDropdown(String departureField)
+    By getDepartureDateXpath(String monthYear, String date)
+    By getTravellersNClassDropdown(String travellerNClassLabel)
+    By getTravellersIncrement(String travellerType)
+    By getTravellersDecrement(String travellerType)
+    By getTravellersCountXpath(String travellerType)
+    By getTravellersClassXpath(String travellerClass)
+    boolean verifyFlightsPageHeader()
+    String getPageHeaderText()
+    void chooseTripType(String tripType)
+    boolean verifyFields(String webElementName)
+    boolean verifyDepartureFieldDisplayed(String webElementName)
+    boolean verifyTravellersClassFieldDisplayed(String webElementName)
+    void selectFromRToValues(String fromOrToField, String fromOrToValue)
+    void selectDepartureDate(String departureField, String monthYear, String date)
+    void clickTravellersNClass(String travellersNClassField)
+    void selectTravellerCount(String travellerType, String noOfTravellers)
+    void selectTravelClassType(String classType)
+    void clickDoneButton_TravelNClass()
+    void clickSearchFlights()
+    String getSearchResultsHeaderText()
+  }
