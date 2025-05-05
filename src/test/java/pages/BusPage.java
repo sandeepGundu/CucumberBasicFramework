@@ -15,36 +15,84 @@ public class BusPage {
     }
 
     // Locators for the bus page elements
+    private By busPageHeader = By.xpath("//section[contains(@class, 'HomePagestyles')]//h1");
     private By fromField = By.id("fromCity");
+
     private By toField = By.id("toCity");
     private By travelDateField = By.id("travelDate");
-    private By searchBusButton = By.id("searchBusButton");
     private By busSearchResultsSection = By.id("busSearchResults");
+    private By busSearchResults_UpdateResults = By.xpath("//span[text()='UPDATE SEARCH']/ancestor::button");
+    private By searchButton = By.xpath("//button[text()='Search Bus']/parent::div[contains(@class, 'ButtonWrap')]");
 
-    public void verifyBusPageLoaded() {
-        seleniumUtils.isElementDisplayed(driver.findElement(fromField));
-        seleniumUtils.isElementDisplayed(driver.findElement(toField));
-        seleniumUtils.isElementDisplayed(driver.findElement(travelDateField));
-        seleniumUtils.isElementDisplayed(driver.findElement(searchBusButton));
+    private By getGivenInputField(String fieldName)
+    {
+        return By.xpath("//div[contains(@class, 'InputText')]//label[text()='" + fieldName + "']//following-sibling::input");
     }
 
-    public void selectFromCity(String fromCity) {
-        seleniumUtils.selectDropdownValue(driver.findElement(fromField), fromCity);
+    private By getFromRToFieldOption(String fromValue1, String fromValue2)
+    {
+        return By.xpath("//div[contains(@id, 'downshift')]//div[@role='option']//span[contains(text(), '" + fromValue1 + ", " + fromValue2 + "')]");
     }
 
-    public void selectToCity(String toCity) {
-        seleniumUtils.selectDropdownValue(driver.findElement(toField), toCity);
+    public By getTravelDateInputField(String travelDate)
+    {
+        return By.xpath("//div[contains(@class, 'DateWrapper')]//input");
     }
 
-    public void selectTravelDate(String monthYear, String date) {
-        seleniumUtils.selectDate(driver.findElement(travelDateField), monthYear, date);
+    public By getDateFields(String labelName)
+    {
+        return By.xpath("//div[contains(@class, 'DateWrapper')]//span[contains(text(), '" + labelName + "')]");
+    }
+
+    private By getTravelDateXpath(String monthYear, String date)
+    {
+        //p[contains(text(), 'May 2025')]/ancestor::div[contains(@class, 'calMnth__mnthNmWrp')]//following-sibling::div[contains(@class, 'calMnth__calDateWrap')]//p[text()='10' and not(contains(@class, 'prevDate'))]
+        return By.xpath("//p[contains(text(), '" + monthYear + "')]/ancestor::div[contains(@class, 'OuterMonthWrapDiv')]//following-sibling::div[contains(@class, 'CalendarMainWrapperDiv')]//li//span[text()='" + date + "']");
+    }
+
+    public boolean verifyBusPageHeader()
+    {
+        return seleniumUtils.isElementDisplayed(driver.findElement(busPageHeader));
+    }
+
+    public String getPageHeaderText()
+    {
+        return seleniumUtils.getElementText(driver.findElement(busPageHeader));
+    }
+
+    public void verifyFields(String fieldName)
+    {
+        seleniumUtils.isElementDisplayed(driver.findElement(getGivenInputField(fieldName)));
+    }
+
+    public void verifyTravelDateField(String fieldName)
+    {
+        seleniumUtils.isElementDisplayed(driver.findElement(getTravelDateInputField(fieldName)));
+    }
+
+    public void verifyTravelDateLabels(String labelName)
+    {
+        seleniumUtils.isElementDisplayed(driver.findElement(getDateFields(labelName)));
+    }
+
+    public void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)
+    {
+        seleniumUtils.clickElement(driver.findElement(getGivenInputField(fromOrToField)));
+        seleniumUtils.sendText(driver.findElement(getGivenInputField(fromOrToField)), fromOrToValue1);
+        seleniumUtils.clickElement(driver.findElement(getFromRToFieldOption(fromOrToValue1, fromOrToValue2)));
+    }
+
+    public void selectTravelDate(String travelDateField, String monthYear, String date)
+    {
+        seleniumUtils.clickElement(driver.findElement(getTravelDateInputField(travelDateField)));
+        seleniumUtils.clickElement(driver.findElement(getTravelDateXpath(monthYear, date)));
     }
 
     public void clickSearchBusButton() {
-        driver.findElement(searchBusButton).click();
+        seleniumUtils.clickElement(driver.findElement(searchButton));
     }
 
     public void verifyBusSearchResultsDisplayed() {
-        seleniumUtils.isElementDisplayed(driver.findElement(busSearchResultsSection));
+        seleniumUtils.isElementDisplayed(driver.findElement(busSearchResults_UpdateResults));
     }
 }

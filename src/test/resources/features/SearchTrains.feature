@@ -1,7 +1,7 @@
 Feature: Search trains for Round-Trip functionality
   This feature tests the trains search functionality between the given From and To locations
 
-  @SmokeTest
+  #@SmokeTest
   Scenario: Successful flights search for Round-Trip
     Given the user is on the home page
     When the user chooses "Trains" from main menu

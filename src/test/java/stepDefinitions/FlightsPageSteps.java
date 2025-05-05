@@ -55,6 +55,7 @@ public class FlightsPageSteps {
 
         flightsPage.selectFromRToValues(fromOrToField, value);
     }
+
     @When("the user selects {string} month value as {string} and date value as {string}")
     public void the_user_selects_month_value_as_and_date_value_as(String departure, String monthYear, String date) {
         // Write code here that turns the phrase above into concrete actions

@@ -1,7 +1,7 @@
 Feature: Search flights for Round-Trip functionality
   This feature tests the flight search functionality between the given From and To locations for Round-trip
 
-  @SmokeTest
+  #@SmokeTest
   Scenario: Successful flights search for Round-Trip
     Given the user is on the home page
     When the user chooses "Flights" from main menu

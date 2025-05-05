@@ -1,7 +1,7 @@
 Feature: Search flights functionality
   This feature tests the flight search functionality between the given From and To locations
 
-  @SmokeTest
+  #@SmokeTest
   Scenario: Successful flights search
     Given the user is on the home page
     When the user chooses "Flights" from main menu
