@@ -2,25 +2,29 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import stepDefinitions.WebDriver_DriverManager;
 import utils.SeleniumUtils;
 
 public class BusPage {
-    WebDriver driver;
+    /*WebDriver driver;
     SeleniumUtils seleniumUtils;
 
     // Constructor to initialize WebDriver
     public BusPage(WebDriver driver) {
         this.driver = driver;
         this.seleniumUtils = new SeleniumUtils(driver);
+    }*/
+
+    SeleniumUtils seleniumUtils;
+    WebDriver driver = WebDriver_DriverManager.getDriver();
+
+    public BusPage() {
+        seleniumUtils = new SeleniumUtils(WebDriver_DriverManager.getDriver());
     }
+
 
     // Locators for the bus page elements
     private By busPageHeader = By.xpath("//section[contains(@class, 'HomePagestyles')]//h1");
-    private By fromField = By.id("fromCity");
-
-    private By toField = By.id("toCity");
-    private By travelDateField = By.id("travelDate");
-    private By busSearchResultsSection = By.id("busSearchResults");
     private By busSearchResults_UpdateResults = By.xpath("//span[text()='UPDATE SEARCH']/ancestor::button");
     private By searchButton = By.xpath("//button[text()='Search Bus']/parent::div[contains(@class, 'ButtonWrap')]");
 
@@ -75,16 +79,30 @@ public class BusPage {
         seleniumUtils.isElementDisplayed(driver.findElement(getDateFields(labelName)));
     }
 
-    public void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)
+    /*public void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)
     {
         seleniumUtils.clickElement(driver.findElement(getGivenInputField(fromOrToField)));
         seleniumUtils.sendText(driver.findElement(getGivenInputField(fromOrToField)), fromOrToValue1);
         seleniumUtils.clickElement(driver.findElement(getFromRToFieldOption(fromOrToValue1, fromOrToValue2)));
+    }*/
+
+    public void selectFromValue(String fromOrToValue1, String fromOrToValue2)
+    {
+        seleniumUtils.clickElement(driver.findElement(getGivenInputField("FROM")));
+        seleniumUtils.sendText(driver.findElement(getGivenInputField("FROM")), fromOrToValue1);
+        seleniumUtils.clickElement(driver.findElement(getFromRToFieldOption(fromOrToValue1, fromOrToValue2)));
     }
 
-    public void selectTravelDate(String travelDateField, String monthYear, String date)
+    public void selectToValue(String fromOrToValue1, String fromOrToValue2)
     {
-        seleniumUtils.clickElement(driver.findElement(getTravelDateInputField(travelDateField)));
+        seleniumUtils.clickElement(driver.findElement(getGivenInputField("TO")));
+        seleniumUtils.sendText(driver.findElement(getGivenInputField("TO")), fromOrToValue1);
+        seleniumUtils.clickElement(driver.findElement(getFromRToFieldOption(fromOrToValue1, fromOrToValue2)));
+    }
+
+    public void selectTravelDate(String monthYear, String date)
+    {
+        seleniumUtils.clickElement(driver.findElement(getTravelDateInputField("Travel Date")));
         seleniumUtils.clickElement(driver.findElement(getTravelDateXpath(monthYear, date)));
     }
 
@@ -92,7 +110,8 @@ public class BusPage {
         seleniumUtils.clickElement(driver.findElement(searchButton));
     }
 
-    public void verifyBusSearchResultsDisplayed() {
+    public void verifyBusSearchResultsDisplayed() throws InterruptedException {
         seleniumUtils.isElementDisplayed(driver.findElement(busSearchResults_UpdateResults));
+        Thread.sleep(10000);
     }
 }

@@ -1,26 +1,32 @@
 package pages;
 
-import io.cucumber.java.sl.In;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import stepDefinitions.Hooks;
+import stepDefinitions.WebDriver_DriverManager;
 import utils.SeleniumUtils;
 
 public class FlightsPage
 {
-    WebDriver driver;
+    /*WebDriver driver;
 
     // Constructor to initialize WebDriver
     public FlightsPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    SeleniumUtils seleniumUtils = new SeleniumUtils(driver); // Create an instance of SeleniumUtils
+    SeleniumUtils seleniumUtils = new SeleniumUtils(driver); */// Create an instance of SeleniumUtils
 
     /*WebDriver driver = Hooks.driver; // Access WebDriver from Hooks
     SeleniumUtils seleniumUtils = new SeleniumUtils(driver); // Create an instance of SeleniumUtils
 */
+
+    SeleniumUtils seleniumUtils;
+    WebDriver driver = WebDriver_DriverManager.getDriver();
+
+    public FlightsPage() {
+        seleniumUtils = new SeleniumUtils(WebDriver_DriverManager.getDriver());
+    }
+
     // Locators for the Flights page elements
     public By flightsPageHeader = By.xpath("//div[@data-id='flt-srch-wdgt']//h2");
 
@@ -123,14 +129,41 @@ public class FlightsPage
 
     public void selectFromRToValues(String fromOrToField, String fromOrToValue)
     {
-        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField(fromOrToField)));
+        seleniumUtils.waitForElementToBeVisible(getGivenDropdownField(fromOrToField), 5);
+        if(fromOrToField.equalsIgnoreCase("From") || fromOrToField.equalsIgnoreCase("Where to"))
+        {
+            seleniumUtils.clickElement(driver.findElement(getGivenDropdownField(fromOrToField)));
+        }
+
         seleniumUtils.sendText(driver.findElement(getFromToLocationField(fromOrToField)), fromOrToValue);
         seleniumUtils.clickElement(driver.findElement(getFromLocationValueField(fromOrToValue)));
     }
 
-    public void selectDepartureDate(String departureField, String monthYear, String date)
+    public void selectFromValue(String value)
     {
-        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField(departureField)));
+        seleniumUtils.waitForElementToBeVisible(getGivenDropdownField("From"), 5);
+        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField("From")));
+        seleniumUtils.sendText(driver.findElement(getFromToLocationField("From")), value);
+        seleniumUtils.clickElement(driver.findElement(getFromLocationValueField(value)));
+    }
+
+    public void selectToValue(String value)
+    {
+        seleniumUtils.waitForElementToBeVisible(getFromToLocationField("To"), 5);
+        seleniumUtils.clickElement(driver.findElement(getFromToLocationField("To")));
+        seleniumUtils.sendText(driver.findElement(getFromToLocationField("To")), value);
+        seleniumUtils.clickElement(driver.findElement(getFromLocationValueField(value)));
+    }
+
+    public void selectDepartureDate(String monthYear, String date)
+    {
+        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField("Departure")));
+        seleniumUtils.clickElement(driver.findElement(getDepartureDateXpath(monthYear, date)));
+    }
+
+    public void selectReturnDate(String monthYear, String date)
+    {
+        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField("Return")));
         seleniumUtils.clickElement(driver.findElement(getDepartureDateXpath(monthYear, date)));
     }
 

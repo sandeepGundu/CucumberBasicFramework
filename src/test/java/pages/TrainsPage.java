@@ -2,17 +2,25 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import stepDefinitions.WebDriver_DriverManager;
 import utils.SeleniumUtils;
 public class TrainsPage
 {
-    WebDriver driver;
+    /*WebDriver driver;
 
     // Constructor to initialize WebDriver
     public TrainsPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    SeleniumUtils seleniumUtils = new SeleniumUtils(driver);
+    SeleniumUtils seleniumUtils = new SeleniumUtils(driver);*/
+
+    SeleniumUtils seleniumUtils;
+    WebDriver driver = WebDriver_DriverManager.getDriver();
+
+    public TrainsPage() {
+        seleniumUtils = new SeleniumUtils(WebDriver_DriverManager.getDriver());
+    }
 
     private By getTrainsTypeOption(String travelType)
     {
@@ -82,16 +90,30 @@ public class TrainsPage
         return By.xpath("//p[contains(text(), '" + monthYear + "')]/ancestor::div[contains(@class, 'calMnth__mnthNmWrp')]//following-sibling::div[contains(@class, 'calMnth__calDateWrap')]//p[text()='" + date + "' and not(contains(@class, 'prevDate'))]");
     }
 
-    public void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)
+    /*public void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)
     {
         seleniumUtils.clickElement(driver.findElement(getGivenDropdownField(fromOrToField)));
         seleniumUtils.sendText(driver.findElement(getFromToLocationField(fromOrToField)), fromOrToValue1);
         seleniumUtils.clickElement(driver.findElement(getFromLocationValueField(fromOrToValue1, fromOrToValue2)));
+    }*/
+
+    public void selectFromValue(String fromOrToValue1, String fromOrToValue2)
+    {
+        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField("From")));
+        seleniumUtils.sendText(driver.findElement(getFromToLocationField("From")), fromOrToValue1);
+        seleniumUtils.clickElement(driver.findElement(getFromLocationValueField(fromOrToValue1, fromOrToValue2)));
     }
 
-    public void selectDepartureDate(String departureField, String monthYear, String date)
+    public void selectToValue(String fromOrToValue1, String fromOrToValue2)
     {
-        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField(departureField)));
+        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField("To")));
+        seleniumUtils.sendText(driver.findElement(getFromToLocationField("To")), fromOrToValue1);
+        seleniumUtils.clickElement(driver.findElement(getFromLocationValueField(fromOrToValue1, fromOrToValue2)));
+    }
+
+    public void selectDepartureDate(String monthYear, String date)
+    {
+        seleniumUtils.clickElement(driver.findElement(getGivenDropdownField("Departure")));
         seleniumUtils.clickElement(driver.findElement(getDepartureDateXpath(monthYear, date)));
     }
 
