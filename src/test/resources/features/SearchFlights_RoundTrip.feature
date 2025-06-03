@@ -10,8 +10,8 @@ Feature: Search flights for Round-Trip functionality
     Then From, To, Departure, Return, Travellers & Class dropdown should be displayed
     When user selects From value as "HYD"
     And user selects To value as "BLR"
-    And user selects Departure month value as "May 2025" and date value as "31"
-    And user selects Return month value as "June 2025" and date value as "2"
+    And user selects Departure month value as "June 2025" and date value as "10"
+    And user selects Return month value as "June 2025" and date value as "15"
     When user clicks Travellers & Class dropdown
     And user selects traveller Adults value as "2"
     And user selects traveller Infants value as "1"

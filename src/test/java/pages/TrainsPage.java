@@ -87,7 +87,8 @@ public class TrainsPage
     private By getDepartureDateXpath(String monthYear, String date)
     {
         //p[contains(text(), 'May 2025')]/ancestor::div[contains(@class, 'calMnth__mnthNmWrp')]//following-sibling::div[contains(@class, 'calMnth__calDateWrap')]//p[text()='10' and not(contains(@class, 'prevDate'))]
-        return By.xpath("//p[contains(text(), '" + monthYear + "')]/ancestor::div[contains(@class, 'calMnth__mnthNmWrp')]//following-sibling::div[contains(@class, 'calMnth__calDateWrap')]//p[text()='" + date + "' and not(contains(@class, 'prevDate'))]");
+        //return By.xpath("//p[contains(text(), '" + monthYear + "')]/ancestor::div[contains(@class, 'calMnth__mnthNmWrp')]//following-sibling::div[contains(@class, 'calMnth__calDateWrap')]//p[text()='" + date + "' and not(contains(@class, 'prevDate'))]");
+        return By.xpath("//p[contains(text(), '" + monthYear + "')]/ancestor::div[contains(@class, 'calMnth__mnthNmWrp')]//following-sibling::div[contains(@class, 'calMnth__calDateWrap')]//div//p[text()='" + date + "' and contains(@class, 'calDate')]");
     }
 
     /*public void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)

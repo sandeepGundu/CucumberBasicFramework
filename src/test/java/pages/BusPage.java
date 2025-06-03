@@ -79,13 +79,6 @@ public class BusPage {
         seleniumUtils.isElementDisplayed(driver.findElement(getDateFields(labelName)));
     }
 
-    /*public void selectFromRToValues(String fromOrToField, String fromOrToValue1, String fromOrToValue2)
-    {
-        seleniumUtils.clickElement(driver.findElement(getGivenInputField(fromOrToField)));
-        seleniumUtils.sendText(driver.findElement(getGivenInputField(fromOrToField)), fromOrToValue1);
-        seleniumUtils.clickElement(driver.findElement(getFromRToFieldOption(fromOrToValue1, fromOrToValue2)));
-    }*/
-
     public void selectFromValue(String fromOrToValue1, String fromOrToValue2)
     {
         seleniumUtils.clickElement(driver.findElement(getGivenInputField("FROM")));

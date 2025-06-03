@@ -10,6 +10,6 @@ Feature: Search trains for Round-Trip functionality
     Then From, To, Departure, Today, Tomorrow, Day After Tomorrow fields should be displayed
     When user selects From value as "SC", "Secunderabad Junction"
     And user selects To value as "BZA", "Vijayawada Junction"
-    And user selects Departure month value as "May 2025" and date value as "30" for the train
+    And user selects Departure month value as "June 2025" and date value as "20" for the train
     And user clicks on search trains button
     Then train search results section should be displayed

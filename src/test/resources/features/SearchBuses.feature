@@ -9,6 +9,6 @@ Feature: Search for busses functionality
     And FROM, TO, Travel Date, Today, Tomorrow fields should be displayed
     When user opts FROM value as "Hyderabad", "Telangana"
     And user opts TO value as "Vijayawada", "Andhra Pradesh"
-    And user selects Travel Date month value as "May 2025" and date value as "31" for the bus
+    And user selects Travel Date month value as "June 2025" and date value as "25" for the bus
     And user clicks on search bus button
     Then bus search results section should be displayed

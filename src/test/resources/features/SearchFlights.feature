@@ -10,7 +10,7 @@ Feature: Search flights functionality
     Then From, To, Departure, Travellers & Class dropdown should be displayed
     When user selects From value as "HYD"
     And user selects To value as "BLR"
-    And user selects Departure month value as "May 2025" and date value as "31"
+    And user selects Departure month value as "June 2025" and date value as "25"
     When user clicks Travellers & Class dropdown
     And user selects traveller Adults value as "2"
     And user selects traveller Infants value as "1"
