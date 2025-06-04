@@ -12,5 +12,5 @@ Feature: Search cabs functionality
     And user selects To value as "Sanath Nagar"
     And user selects Pickup Date month value as "June 2025" and date value as "27"
     And user selects Pickup Time value as "10:00 AM"
-    And clicks on "search cabs" button
+    And clicks on search cabs button
     Then cabs search results should be displayed
