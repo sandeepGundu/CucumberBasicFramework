@@ -15,11 +15,13 @@ import java.nio.file.Files;
 
 public class SeleniumUtils
 {
-    private WebDriver driver;
+    WebDriver driver;
+    WebDriverWait wait;
 
     // Constructor to initialize WebDriver
     public SeleniumUtils(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     //Open given url page
@@ -34,7 +36,8 @@ public class SeleniumUtils
             element.click();
             System.out.println("Clicked on the element: " + element);
         } catch (Exception e) {
-            System.out.println("Failed to click on the element: " + e.getMessage());
+            System.err.println("Failed to click on element: " + element);
+            throw e;
         }
     }
 
@@ -45,7 +48,8 @@ public class SeleniumUtils
             element.sendKeys(text);
             System.out.println("Entered text: " + text);
         } catch (Exception e) {
-            System.out.println("Failed to send text: " + e.getMessage());
+            System.err.println("Failed to send text: " + element);
+            throw e;
         }
     }
 

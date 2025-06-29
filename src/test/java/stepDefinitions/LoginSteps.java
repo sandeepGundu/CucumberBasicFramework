@@ -2,9 +2,6 @@ package stepDefinitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import io.cucumber.java.en.Given;
 import pages.DashboardPage;
 import utils.SeleniumUtils;
@@ -13,9 +10,9 @@ import pages.LoginPage;
 
 public class LoginSteps
 {
-    WebDriver driver = Hooks.driver; // Access WebDriver from Hooks
-    LoginPage loginPage = new LoginPage(driver); // Create an instance of LoginPage
-    SeleniumUtils seleniumUtils = new SeleniumUtils(driver); // Create an instance of SeleniumUtils
+    //WebDriver driver = Hooks.driver; // Access WebDriver from Hooks
+    LoginPage loginPage = new LoginPage(); // Create an instance of LoginPage
+    SeleniumUtils seleniumUtils = new SeleniumUtils(WebDriver_DriverManager.getDriver()); // Create an instance of SeleniumUtils
 
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page() {
@@ -78,7 +75,7 @@ public class LoginSteps
         seleniumUtils.takeScreenshot("src/test/screenshots/dashboard.png");
     }
 
-    DashboardPage dashboardPage = new DashboardPage(driver);
+    DashboardPage dashboardPage = new DashboardPage();
 
     @Then("the user should see the dashboard header")
     public void the_user_should_see_the_dashboard_header() {

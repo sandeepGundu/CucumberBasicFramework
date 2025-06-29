@@ -2,15 +2,23 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import stepDefinitions.WebDriver_DriverManager;
+import utils.SeleniumUtils;
 
 public class LoginPage
 {
-    WebDriver driver;
+    /*WebDriver driver;
 
     // Constructor to initialize WebDriver
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+    }*/
+
+    SeleniumUtils seleniumUtils;
+    WebDriver driver = WebDriver_DriverManager.getDriver();
+
+    public LoginPage() {
+        seleniumUtils = new SeleniumUtils(WebDriver_DriverManager.getDriver());
     }
 
     // Locators for the login page elements
