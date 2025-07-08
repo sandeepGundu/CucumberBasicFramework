@@ -2,6 +2,18 @@ Feature: Search flights functionality
   This feature tests the flight search functionality between the given From and To locations
 
   @SmokeTest
+  Scenario Outline: Sort comparison results by key attributes
+    Given the user is on the flight comparison view with multiple flights displayed
+    When the user selects to sort the flights by <Sort_Attribute>
+    Then the flights should be sorted in ascending order based on <Sort_Attribute>
+
+    Examples:
+      | Sort_Attribute |
+      | Price          |
+      | Duration       |
+      | Rating         |
+
+  @SmokeTest
   Scenario: Successful flights search
     Given user is on the home page
     When user chooses "Flights" from main menu
