@@ -6,6 +6,17 @@ import org.junit.Assert;
 import pages.FlightsPage;
 
 public class FlightsPageSteps {
+
+    @When("the user selects to sort the flights by {string}")
+    public void user_selects_to_sort_flights_by(String sortAttribute) {
+        flightsPage.sortFlightsByAttribute(sortAttribute);
+    }
+
+    @Then("the flights should be sorted in ascending order based on {string}")
+    public void flights_should_be_sorted_in_ascending_order(String sortAttribute) {
+        boolean isSorted = flightsPage.verifyFlightsSortedByAttribute(sortAttribute);
+        Assert.assertTrue("Flights are not sorted by " + sortAttribute, isSorted);
+    }
     //WebDriver driver = Hooks.driver; // Access WebDriver from Hooks
     //HomePage homePage = new HomePage(driver); // Create an instance of LoginPage
     //SeleniumUtils seleniumUtils = new SeleniumUtils(driver); // Create an instance of SeleniumUtils
