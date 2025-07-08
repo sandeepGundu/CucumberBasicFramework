@@ -6,6 +6,30 @@ import stepDefinitions.WebDriver_DriverManager;
 import utils.SeleniumUtils;
 
 public class FlightsPage
+
+    private By getSortOption(String sortAttribute) {
+        return By.xpath("//button[contains(@aria-label, 'Sort by " + sortAttribute + "')]");
+    }
+
+    private By getFlightAttributeValues(String attribute) {
+        return By.xpath("//div[contains(@class, 'flight-" + attribute.toLowerCase() + "')]");
+    }
+
+    public void sortFlightsByAttribute(String attribute) {
+        seleniumUtils.clickElement(driver.findElement(getSortOption(attribute)));
+    }
+
+    public boolean verifyFlightsSortedByAttribute(String attribute) {
+        List<WebElement> elements = driver.findElements(getFlightAttributeValues(attribute));
+        List<String> values = elements.stream()
+                                      .map(WebElement::getText)
+                                      .collect(Collectors.toList());
+
+        List<String> sortedValues = new ArrayList<>(values);
+        Collections.sort(sortedValues);
+
+        return values.equals(sortedValues);
+    }
 {
     /*WebDriver driver;
 
